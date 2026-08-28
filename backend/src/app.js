@@ -18,6 +18,8 @@ import geocodingRoutes from "./routes/geocodingRoutes.js";
 import closureDateRoutes from "./routes/closureDateRoutes.js";
 import fontRoutes from "./routes/fontRoutes.js";
 import userRoutes from "./routes/users.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../SwaggerEvaluacionJoshua.json" with{type:"json"}
 
 const app = express();
 
@@ -44,6 +46,8 @@ app.use("/api/excel", excelRoutes);
 app.use("/api/images", imageRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/banners", bannerRoutes);
+
+
 app.use("/api/announcement-bar", announcementBarRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/store-hours", storeHoursRoutes);
@@ -52,7 +56,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/geocoding", geocodingRoutes);
 app.use("/api/closure-dates", closureDateRoutes);
 app.use("/api/fonts", fontRoutes);
-
+app.use("/", swaggerUi.serve,swaggerUi.setup(swaggerDocument))
 app.use(notFound);
 app.use(errorHandler);
 
